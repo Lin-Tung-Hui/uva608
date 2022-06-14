@@ -4,12 +4,11 @@
 #include <sstream>
 
 enum CoinWeight {
-	UN_WEIGHT,
+    UN_WEIGHT,
     LIGHT_WEIGHT,
     NORMAL_WEIGHT,
     HEAVY_WEIGHT,
 };
-
 
 void simulation(std::string *left, std::string *right, std::string *result, int candidate, int candidate_weight, std::ostream &os)
 {
@@ -34,15 +33,15 @@ void simulation(std::string *left, std::string *right, std::string *result, int 
                     left_wieght += NORMAL_WEIGHT;
             }
 
-            if  ((result[wieght].compare("up") == 0) && (left_wieght <= right_wieght)) {
+            if ((result[wieght].compare("up") == 0) && (left_wieght <= right_wieght)) {
                 candidate_flag = false;
                 break;
             }
 
-			if ((result[wieght].compare("down") == 0) && (left_wieght >= right_wieght)) {
-				candidate_flag = false;
-				break;
-			}
+            if ((result[wieght].compare("down") == 0) && (left_wieght >= right_wieght)) {
+                candidate_flag = false;
+                break;
+            }
         }
     }
 
