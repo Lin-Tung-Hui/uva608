@@ -10,7 +10,7 @@ enum CoinWeight {
     HEAVY_WEIGHT,
 };
 
-void simulation(std::string *left, std::string *right, std::string *result, int candidate, int candidate_weight, std::ostream &os)
+bool simulation(std::string *left, std::string *right, std::string *result, int candidate, int candidate_weight, std::ostream &os)
 {
     bool candidate_flag = true;
 
@@ -52,6 +52,7 @@ void simulation(std::string *left, std::string *right, std::string *result, int 
             os << char(65 + candidate) << " is the counterfeit coin and it is heavy.\n";
         }
     }
+    return candidate_flag;
 }
 
 void find_counterfeit_coin(std::string *left, std::string *right, std::string *result, std::ostream &os)
@@ -73,8 +74,11 @@ void find_counterfeit_coin(std::string *left, std::string *right, std::string *r
 
     for (int candidate = 0; candidate < 12; candidate++) {
         if (coin_weight[candidate] == 0) {
-            simulation(left, right, result, candidate, LIGHT_WEIGHT, os);
-            simulation(left, right, result, candidate, HEAVY_WEIGHT, os);
+            if (simulation(left, right, result, candidate, LIGHT_WEIGHT, os))
+                break;
+
+            if (simulation(left, right, result, candidate, HEAVY_WEIGHT, os))
+                break;
         }
     }
 }
@@ -105,25 +109,11 @@ void uva608(std::istream &is, std::ostream &os)
 
 int main(int argc, char **argv)
 {
-    std::istringstream iss(R"--(1
-ABC DEF up
-GHI JKL even
-EF DA up
-)--");
-
-    std::istringstream iss2(R"--(1
-ABC FGJ down
-DC HG down
-ABIHG JKEDF up
-)--");
-
 #ifdef GTEST
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 #else
-    //uva608(iss, std::cout);
     uva608(std::cin, std::cout);
 #endif
-
     return 0;
 }
