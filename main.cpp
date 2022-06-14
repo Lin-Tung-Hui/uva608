@@ -73,7 +73,7 @@ void find_counterfeit_coin(std::string *left, std::string *right, std::string *r
     }
 
     for (int candidate = 0; candidate < 12; candidate++) {
-        if (coin_weight[candidate] == 0) {
+        if (coin_weight[candidate] == UN_WEIGHT) {
             if (simulation(left, right, result, candidate, LIGHT_WEIGHT, os))
                 break;
 
